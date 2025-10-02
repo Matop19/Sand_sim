@@ -19,7 +19,10 @@ def window():
                                    row * blocksize,
                                    blocksize, blocksize)
                 pygame.draw.rect(screen, (0,0,0), rect, 1)
+        picker = pygame.Rect(width-200, 0, 200, height)
+        pygame.draw.rect(screen, (0,0,0), picker, 0)
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
 window()
+
