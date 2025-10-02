@@ -2,7 +2,7 @@ class Empty():
 	index = 0
 	rules = []
 	color = (255,255,255)
-	speed = 0 #Vitesse de dessente sur la grille
+	speed = 0 #Vitesse de dessente sur la grille (plus le chiffre est petit, plus c'est lent)
 
 class Sand():
 	index = 1
@@ -24,18 +24,18 @@ class Steel():
 
 class Water():
 	index = 4
-	rules = ["4FFFF0FFF400004000","4FFF0FFFF400040000","4FFFFF0FF400000400"]
+	rules = ["4FFFF0FFF400001000","4FFF0FFFF400010000","4FFFFF0FF400000100","4FF0FFF0F400100010","4FFFFFF0F400000010","4FF0FFFF400100000"]
 	color = (76, 124, 234)
 	speed = 2
 
 class Lava():
 	index = 5
-	rules = ["5"]
+	rules = ["5FFFF0FFF500001000","5FFF0FFFF500010000","5FFFFF0FF500000100","5FF0FFF0F500100010","5FFFFFF0F500000010","5FF0FFFF500100000"]
 	color = (213, 76, 2)
 	speed = 1
 
 class Glass():
 	index = 6
-	rules = ["6"]
+	rules = ["6FFFFFFFFF60000000"]
 	color = (240,240,240)
 	speed = 0
