@@ -1,0 +1,3 @@
+width, height = 1400, 800
+circle_radius = 25
+blocksize = 10
