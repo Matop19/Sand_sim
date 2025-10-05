@@ -10,39 +10,45 @@ class Sand():
     rules = ["1FFFF0FFF100001000","1FFF0FFFF100010000","1FFFFF1FF100000100"]
     color = (237,237,26)
     speed = 2
-    x, y = width - 62.5, 50
+    is_used = False
+    x, y = width - 100, 50
 
 class Rock():
     index = 2
     rules = ["2FFFF0FFF200001000"]
     color = (95,95,95)
     speed = 3
-    x, y = width - 137.5, 50
+    is_used = False
+    x, y = width - 50, 50
 
 class Steel():
     index = 3
     rules = ["3FFFFFFFFF30000000"]
     color = (192,192,192)
     speed = 0
-    x, y = width - 62.5, 125
+    is_used = False
+    x, y = width - 100, 125
 
 class Water():
     index = 4
     rules = ["4FFFF0FFF400001000","4FFF0FFFF400010000","4FFFFF0FF400000100","4FF0FFF0F400100010","4FFFFFF0F400000010","4FF0FFFF400100000"]
     color = (76, 124, 234)
     speed = 2
-    x, y = width - 137.5, 125
+    is_used = False
+    x, y = width - 50, 125
 
 class Lava():
     index = 5
     rules = ["5FFFF0FFF500001000","5FFF0FFFF500010000","5FFFFF0FF500000100","5FF0FFF0F500100010","5FFFFFF0F500000010","5FF0FFFF500100000"]
     color = (213, 76, 2)
     speed = 1
-    x, y = width - 62.5, 200
+    is_used = False
+    x, y = width - 100, 200
 
 class Glass():
     index = 6
     rules = ["6FFFFFFFFF60000000"]
     color = (240,240,240)
     speed = 0
-    x, y = width - 137.5, 200
+    is_used = False
+    x, y = width - 50, 200
