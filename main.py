@@ -1,42 +1,87 @@
 from Variables import *
 import particlesManager
-import particles
+from particles import *
 import pygame
+import math
 pygame.init()
 #Différents imports + initiation de pygame
-
 def window():
-    screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Sand_simulation")
     clock = pygame.time.Clock()
+    brush_size = 1  # taille de base du pinceau (en nombre de blocs)
     #initier la page
-
+    for x in range(0, draw_area_width, blocksize):
+        pygame.draw.line(grid_surface, (255, 255, 255), (x, 0), (x, height))
+    for y in range(0, height, blocksize):
+        pygame.draw.line(grid_surface, (255, 255, 255), (0, y), (draw_area_width, y))
+    # Dessin de la grille
     running = True
     while running:
+        screen.fill((0, 0, 0))
+        screen.blit(grid_surface, (0, 0))
+
+        palette = pygame.Rect(width - 150, 0, 150, height)
+        pygame.draw.rect(screen, (0, 0, 0), palette, 0)
+        pygame.draw.circle(screen, Water.color, (Water.x, Water.y), circle_radius)
+        pygame.draw.circle(screen, Sand.color, (Sand.x, Sand.y), circle_radius)
+        pygame.draw.circle(screen, Lava.color, (Lava.x, Lava.y), circle_radius)
+        pygame.draw.circle(screen, Rock.color, (Rock.x, Rock.y), circle_radius)
+        pygame.draw.circle(screen, Steel.color, (Steel.x, Steel.y), circle_radius)
+        pygame.draw.circle(screen, Glass.color, (Glass.x, Glass.y), circle_radius)
+        # choisir la matière
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
     #permet de quitter la fenêtre
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    mouse_x, mouse_y = event.pos
 
-        screen.fill((225,225,225))
-        for row in range(0,width):
-            for col in range(0,height):
-                rect = pygame.Rect(col * blocksize,
-                                   row * blocksize,
-                                   blocksize, blocksize)
-                pygame.draw.rect(screen, (0,0,0), rect, 1)
-        #Création de la grille
+                    # clique sur la palette
+                    if math.dist((mouse_x, mouse_y), (Sand.x, Sand.y)) <= circle_radius:
+                        Sand.is_used = True
+                        Water.is_used = Lava.is_used = Rock.is_used = Steel.is_used = Glass.is_used = False
+                    elif math.dist((mouse_x, mouse_y), (Water.x, Water.y)) <= circle_radius:
+                        Water.is_used = True
+                        Sand.is_used = Lava.is_used = Rock.is_used = Steel.is_used = Glass.is_used = False
+                    elif math.dist((mouse_x, mouse_y), (Lava.x, Lava.y)) <= circle_radius:
+                        Lava.is_used = True
+                        Water.is_used = Sand.is_used = Rock.is_used = Steel.is_used = Glass.is_used = False
+                    elif math.dist((mouse_x, mouse_y), (Rock.x, Rock.y)) <= circle_radius:
+                        Rock.is_used = True
+                        Water.is_used = Lava.is_used = Sand.is_used = Steel.is_used = Glass.is_used = False
+                    elif math.dist((mouse_x, mouse_y), (Steel.x, Steel.y)) <= circle_radius:
+                        Steel.is_used = True
+                        Water.is_used = Lava.is_used = Rock.is_used = Sand.is_used = Glass.is_used = False
+                    elif math.dist((mouse_x, mouse_y), (Glass.x, Glass.y)) <= circle_radius:
+                        Glass.is_used = True
+                        Water.is_used = Lava.is_used = Rock.is_used = Steel.is_used = Sand.is_used = False
+            elif event.type == pygame.KEYDOWN:
+                # --- Changement de taille du pinceau ---
+                if event.key == pygame.K_1:
+                    brush_size = 1
+                elif event.key == pygame.K_2:
+                    brush_size = 2
+                elif event.key == pygame.K_3:
+                    brush_size = 3
+                elif event.key == pygame.K_4:
+                    brush_size = 4
+                elif event.key == pygame.K_5:
+                    brush_size = 5
+        if Sand.is_used:
+            particlesManager.put_sand_particles(brush_size)
+        if Water.is_used:
+            particlesManager.put_water_particles(brush_size)
+        if Lava.is_used:
+            particlesManager.put_lava_particles(brush_size)
+        if Steel.is_used:
+            particlesManager.put_steel_particles(brush_size)
+        if Rock.is_used:
+            particlesManager.put_rock_particles(brush_size)
+        if Glass.is_used:
+            particlesManager.put_glass_particles(brush_size)
 
-        palette = pygame.Rect(width-200, 0, 200, height)
-        pygame.draw.rect(screen, (0,0,0), palette, 0)
-        pygame.draw.circle(screen, particles.Water.color, (particles.Water.x,particles.Water.y), circle_radius)
-        pygame.draw.circle(screen, particles.Sand.color, (particles.Sand.x, particles.Sand.y), circle_radius)
-        pygame.draw.circle(screen, particles.Lava.color, (particles.Lava.x, particles.Lava.y), circle_radius)
-        pygame.draw.circle(screen, particles.Rock.color, (particles.Rock.x, particles.Rock.y), circle_radius)
-        pygame.draw.circle(screen, particles.Steel.color, (particles.Steel.x, particles.Steel.y), circle_radius)
-        pygame.draw.circle(screen, particles.Glass.color, (particles.Glass.x, particles.Glass.y), circle_radius)
-        #choisir la matière
-
+        screen.blit(grid_surface, (0, 0))
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
