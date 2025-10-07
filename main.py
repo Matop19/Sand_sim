@@ -3,8 +3,11 @@ import particlesManager
 from particles import *
 import pygame
 import math
+
 pygame.init()
-#Différents imports + initiation de pygame
+
+
+# Différents imports + initiation de pygame
 def window():
     pygame.display.set_caption("Sand_simulation")
     clock = pygame.time.Clock()
@@ -13,28 +16,26 @@ def window():
     toggleGrid = True
     hasGrid = False
 
-
     # Dessin de la grille
     running = True
     while running:
         screen.fill((0, 0, 0))
         screen.blit(grid_surface, (0, 0))
-	   
+
         if toggleGrid:
-          toggleGrid = False
-          hasGrid = not hasGrid
-          if(hasGrid):
-            for x in range(0, draw_area_width, blocksize):
-             pygame.draw.line(grid_surface, (255, 255, 255), (x, 0), (x, height))
-            for y in range(0, height, blocksize):
-             pygame.draw.line(grid_surface, (255, 255, 255), (0, y), (draw_area_width, y))
-          else:
-            for x in range(0, draw_area_width, blocksize):
-             pygame.draw.line(grid_surface, (0, 0,0), (x, 0), (x, height))
-            for y in range(0, height, blocksize):
-             pygame.draw.line(grid_surface, (0, 0,0), (0, y), (draw_area_width, y))
-             
-           
+            toggleGrid = False
+            hasGrid = not hasGrid
+            if (hasGrid):
+                for x in range(0, draw_area_width, blocksize):
+                    pygame.draw.line(grid_surface, (255, 255, 255), (x, 0), (x, height))
+                for y in range(0, height, blocksize):
+                    pygame.draw.line(grid_surface, (255, 255, 255), (0, y), (draw_area_width, y))
+            else:
+                for x in range(0, draw_area_width, blocksize):
+                    pygame.draw.line(grid_surface, (0, 0, 0), (x, 0), (x, height))
+                for y in range(0, height, blocksize):
+                    pygame.draw.line(grid_surface, (0, 0, 0), (0, y), (draw_area_width, y))
+
         palette = pygame.Rect(width - 150, 0, 150, height)
         pygame.draw.rect(screen, (0, 0, 0), palette, 0)
         pygame.draw.circle(screen, Water.color, (Water.x, Water.y), circle_radius)
@@ -47,7 +48,7 @@ def window():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-    #permet de quitter la fenêtre
+            # permet de quitter la fenêtre
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     mouse_x, mouse_y = event.pos
@@ -84,23 +85,32 @@ def window():
                 elif event.key == pygame.K_5:
                     brush_size = 5
                 elif event.key == pygame.K_g:
-                   toggleGrid = not toggleGrid
+                    toggleGrid = not toggleGrid
         if pygame.mouse.get_pressed()[0]:
-          if Sand.is_used:
-            particlesManager.put_particle(brush_size, Sand)
-          if Water.is_used:
-            particlesManager.put_particle(brush_size, Water)
-          if Lava.is_used:
-            particlesManager.put_particle(brush_size, Lava)
-          if Steel.is_used:
-            particlesManager.put_particle(brush_size, Steel)
-          if Rock.is_used:
-            particlesManager.put_particle(brush_size, Rock)
-          if Glass.is_used:
-            particlesManager.put_particle(brush_size, Glass)
+            if Sand.is_used:
+                particlesManager.put_particle(brush_size, Sand)
+            if Water.is_used:
+                particlesManager.put_particle(brush_size, Water)
+            if Lava.is_used:
+                particlesManager.put_particle(brush_size, Lava)
+            if Steel.is_used:
+                particlesManager.put_particle(brush_size, Steel)
+            if Rock.is_used:
+                particlesManager.put_particle(brush_size, Rock)
+            if Glass.is_used:
+                particlesManager.put_particle(brush_size, Glass)
 
+        for (row, col), particleType in particles.items():
+            rect = pygame.Rect(col * blocksize,
+                               row * blocksize,
+                               blocksize, blocksize)
+            pygame.draw.rect(grid_surface, particleType.color, rect)
         screen.blit(grid_surface, (0, 0))
         pygame.display.flip()
         clock.tick(60)
     pygame.quit()
+
+
 window()
+window()
+
