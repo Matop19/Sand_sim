@@ -7,7 +7,7 @@ class Empty():
 
 class Sand():
     index = 1
-    rules = ["1FFFF0FFF100001000","1FFF0FFFF100010000","1FFFFF1FF100000100"]
+    rules = ["1FFFF0FFF100001000","1FFF0FFFF100010000","1FFFFF0FF100000100"]
     color = (237,237,26)
     speed = 2
     is_used = False
