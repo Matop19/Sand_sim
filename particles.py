@@ -23,7 +23,7 @@ class Rock():
 
 class Steel():
     index = 3
-    rules = ["3FFFFFFFFF30000000"]
+    rules = []
     color = (192,192,192)
     speed = 0
     is_used = False
@@ -31,7 +31,7 @@ class Steel():
 
 class Water():
     index = 4
-    rules = ["4FFFF0FFF400001000","4FFF0FFFF400010000","4FFFFF0FF400000100","4FFFFFF0FF400000010","4FF0FFFFF400100000"]
+    rules = ["4FFFF0FFF400001000","4FFF0FFFF400010000","4FFFFF0FF400000100","4FFFFF0FF400000010","4FF0FFFFF400100000"]
     color = (76, 124, 234)
     speed = 2
     is_used = False
@@ -39,7 +39,7 @@ class Water():
 
 class Lava():
     index = 5
-    rules = ["5FFFF0FFF500001000","5FFF0FFFF500010000","5FFFFF0FF500000100","5FFFFFF0FF500000010","5FF0FFFFF500100000"]
+    rules = ["5FFFF0FFF500001000","5FFF0FFFF500010000","5FFFFF0FF500000100","5FFFFF0FF500000010","5FF0FFFFF500100000"]
     color = (213, 76, 2)
     speed = 1
     is_used = False
@@ -47,7 +47,7 @@ class Lava():
 
 class Glass():
     index = 6
-    rules = ["6FFFFFFFFF60000000"]
+    rules = []
     color = (240,240,240)
     speed = 0
     is_used = False
